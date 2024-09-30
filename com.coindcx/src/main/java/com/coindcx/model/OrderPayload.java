@@ -1,45 +1,57 @@
 package com.coindcx.model;
 
 public class OrderPayload {
-    private String orderType;
-    private String amount;
-    private String price;
-    private String currencyPair;
-    public String getOrderType() {
-		return orderType;
-	}
-	public void setOrderType(String orderType) {
-		this.orderType = orderType;
-	}
-	public String getAmount() {
-		return amount;
-	}
-	public void setAmount(String amount) {
-		this.amount = amount;
-	}
-	public String getPrice() {
-		return price;
-	}
-	public void setPrice(String price) {
-		this.price = price;
-	}
-	public String getCurrencyPair() {
-		return currencyPair;
-	}
-	public void setCurrencyPair(String currencyPair) {
-		this.currencyPair = currencyPair;
-	}
-	public OrderPayload(String orderType, String amount, String price, String currencyPair) {
-		super();
-		this.orderType = orderType;
-		this.amount = amount;
-		this.price = price;
-		this.currencyPair = currencyPair;
-	}
-	public OrderPayload() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    private String orderType; // buy, sell, cancel
+    private String amount; // Order amount (e.g., "0.1")
+    private double price; // Order price
+    private String currencyPair; // Currency pair (e.g., "BTCUSDT")
+    private String orderId; // Optional: ID for tracking orders
 
-    // Getters, Setters, Constructors
+    // Constructor for buy/sell orders
+    public OrderPayload(String orderType, String amount, double price, String currencyPair) {
+        this.orderType = orderType;
+        this.amount = amount;
+        this.price = price;
+        this.currencyPair = currencyPair;
+    }
+
+    // Constructor for cancel orders (if you want to include orderId)
+    public OrderPayload(String orderType, String orderId, String currencyPair) {
+        this.orderType = orderType;
+        this.orderId = orderId;
+        this.currencyPair = currencyPair;
+    }
+
+    // Getters and Setters (if needed)
+    public String getOrderType() {
+        return orderType;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getCurrencyPair() {
+        return currencyPair;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    // Optionally, implement a toString() method for easier logging
+    @Override
+    public String toString() {
+        return "OrderPayload{" +
+                "orderType='" + orderType + '\'' +
+                ", amount='" + amount + '\'' +
+                ", price=" + price +
+                ", currencyPair='" + currencyPair + '\'' +
+                (orderId != null ? ", orderId='" + orderId + '\'' : "") +
+                '}';
+    }
 }
